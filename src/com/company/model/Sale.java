@@ -9,4 +9,6 @@ public interface Sale {
 	public List<SaleItem> getItems();
 	
 	public void addItem(SaleItem item);
+	
+	public Salesman getSalesman();
 }

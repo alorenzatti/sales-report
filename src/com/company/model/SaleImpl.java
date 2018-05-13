@@ -10,12 +10,12 @@ public class SaleImpl implements Sale {
 	
 	private final List<SaleItem> items;
 	
-	public SaleImpl(Integer id, Salesman salesman) {
+	public SaleImpl(Integer id, List<SaleItem> items, Salesman salesman) {
 		
 		this.id = id;
 		this.salesman = salesman;
 		
-		this.items = new ArrayList<>();
+		this.items = new ArrayList<>(items);
 	}
 	
 	@Override
@@ -31,6 +31,11 @@ public class SaleImpl implements Sale {
 	@Override
 	public List<SaleItem> getItems() {
 		return new ArrayList<>(this.items);
+	}
+	
+	@Override
+	public Salesman getSalesman() {
+		return this.salesman;
 	}
 	
 	@Override
