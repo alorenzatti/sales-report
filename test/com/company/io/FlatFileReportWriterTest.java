@@ -1,6 +1,7 @@
 package com.company.io;
 
 import java.io.File;
+import java.nio.file.Paths;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,10 +25,10 @@ public class FlatFileReportWriterTest {
 		final FlatFileReader flatFileReader = IOFactory.newFlatFileReader("ç");
 		final FlatFileReporter flatFileReporter = ReporterFactory.newFlatFileReporter();
 		
-		final FlatFile flatFile = flatFileReader.getFlatFile(new File("C:/Test/in/flatfile.dat"));
+		final FlatFile flatFile = flatFileReader.getFlatFile(Paths.get("C:/Test/in/flatfile.dat"));
 		this.flatFileReport = flatFileReporter.getReport(flatFile);
 		
-		final FlatFile flatFileNotEquals = flatFileReader.getFlatFile(new File("C:/Test/in/flatfile_not_equals.dat"));
+		final FlatFile flatFileNotEquals = flatFileReader.getFlatFile(Paths.get("C:/Test/in/flatfile_not_equals.dat"));
 		this.flatFileNotEqualsReport = flatFileReporter.getReport(flatFileNotEquals);
 		
 		this.flatFileReportWriter = IOFactory.newFlatFileReportWriter();

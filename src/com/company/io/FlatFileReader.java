@@ -1,10 +1,11 @@
 package com.company.io;
 
-import java.io.File;
+import java.nio.file.FileSystemException;
+import java.nio.file.Path;
 
 import com.company.model.FlatFile;
 
 public interface FlatFileReader {
 	
-	public FlatFile getFlatFile(File flatFile);
+	public FlatFile getFlatFile(Path flatFile);
 }
