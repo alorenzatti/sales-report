@@ -2,8 +2,11 @@ package com.company.io;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.FileSystemException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -29,7 +32,7 @@ class FlatFileReaderImpl implements FlatFileReader {
 		this.separator = separator;
 	}
 	
-	public FlatFile getFlatFile(File flatFile) {
+	public FlatFile getFlatFile(Path flatFile) {
 		
 		final BufferedReader reader = this.init(flatFile);
 		
@@ -40,10 +43,16 @@ class FlatFileReaderImpl implements FlatFileReader {
 		return flatFileModel;
 	}
 	
-	private BufferedReader init(File flatFile) {
+	private BufferedReader init(Path flatFile) {
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader(flatFile));
+			reader = Files.newBufferedReader(flatFile);
+		} catch(FileSystemException e) {
+			e.printStackTrace();
+
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+			
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -59,8 +68,8 @@ class FlatFileReaderImpl implements FlatFileReader {
 		}
 	}
 	
-	private FlatFile processFlatFile(BufferedReader reader, File flatFile) {
-		final FlatFile flatFileModel = ModelFactory.newFlatFile(flatFile.getName());
+	private FlatFile processFlatFile(BufferedReader reader, Path flatFile) {
+		final FlatFile flatFileModel = ModelFactory.newFlatFile(flatFile.getFileName().toString());
 
 		try {
 			while(reader.ready()) {

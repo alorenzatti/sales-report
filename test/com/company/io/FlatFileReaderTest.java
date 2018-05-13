@@ -1,6 +1,6 @@
 package com.company.io;
 
-import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class FlatFileReaderTest {
 	@Test
 	public void testGetFlatFile() {
 		
-		final FlatFile flatFile = this.flatFileReader.getFlatFile(new File("C:/Test/in/flatfile.dat"));
+		final FlatFile flatFile = this.flatFileReader.getFlatFile(Paths.get("C:/Test/in/flatfile.dat"));
 		Assert.assertNotNull(flatFile);
 		
 //		this.printFlatFile(this.flatFile);
