@@ -14,4 +14,6 @@ public interface SaleItem {
 	
 	public void setPrice(Float price);
 	
+	public Float getTotalPrice();
+	
 }

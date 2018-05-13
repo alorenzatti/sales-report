@@ -45,6 +45,12 @@ class SaleItemImpl implements SaleItem {
 	}
 	
 	@Override
+	public Float getTotalPrice() {
+		
+		return this.quantity * this.price;
+	}	
+	
+	@Override
 	public boolean equals(Object obj) {
 		
 		boolean equals = false;
