@@ -16,6 +16,10 @@ class FlatFileReportWriterImpl implements FlatFileReportWriter {
 		flatFileName = flatFileName.substring(0, flatFileName.length() - 4);
 		flatFileName = flatFileName + ".done.dat";
 		
+		if(!outDirectory.exists()) {
+			outDirectory.mkdirs();
+		}
+		
 		final File outFile = new File(outDirectory, flatFileName);
 		
 		try(BufferedWriter writer = new BufferedWriter(new FileWriter(outFile))) {

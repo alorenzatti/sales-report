@@ -23,9 +23,9 @@ public class FlatFileReporterTest {
 	public void setup() {
 		
 		final FlatFileReader flatFileReader = IOFactory.newFlatFileReader("ç");
-		this.flatFile = flatFileReader.getFlatFile(Paths.get("C:/Test/in/flatfile.dat"));
-		this.flatFileEquals = flatFileReader.getFlatFile(Paths.get("C:/Test/in/flatfile_equals.dat"));
-		this.flatFileNotEquals = flatFileReader.getFlatFile(Paths.get("C:/Test/in/flatfile_not_equals.dat"));
+		this.flatFile = flatFileReader.getFlatFile(Paths.get("data/in/flatfile.dat"));
+		this.flatFileEquals = flatFileReader.getFlatFile(Paths.get("data/in/flatfile_equals.dat"));
+		this.flatFileNotEquals = flatFileReader.getFlatFile(Paths.get("data/in/flatfile_not_equals.dat"));
 		
 		this.flatFileReporter = ReporterFactory.newFlatFileReporter();
 	}
