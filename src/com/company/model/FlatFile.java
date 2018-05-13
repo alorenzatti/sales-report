@@ -18,5 +18,7 @@ public interface FlatFile {
 	
 	public List<Sale> getSalesData();
 	
+	public Sale getMostExpensiveSale();
+	
 	public void addSale(Sale sale);
 }

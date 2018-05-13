@@ -60,6 +60,19 @@ class FlatFileImpl implements FlatFile {
 	public List<Sale> getSalesData() {
 		return new ArrayList<>(this.sales);
 	}
+	
+	@Override
+	public Sale getMostExpensiveSale() {
+		
+		Sale mostExpensiveSale = ModelFactory.newSale(0, new ArrayList<>(), null);
+		
+		for(Sale sale : this.sales) {
+			if(sale.getSaleSum() > mostExpensiveSale.getSaleSum()) {
+				mostExpensiveSale = sale;
+			}
+		}
+		return mostExpensiveSale;
+	}
 
 	@Override
 	public void addSale(Sale sale) {
