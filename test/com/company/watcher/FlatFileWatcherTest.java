@@ -18,7 +18,7 @@ public class FlatFileWatcherTest {
 	
 	@Test
 	public void test() {
-		this.flatFileWatcher.watch(Paths.get("C:/Test/in"), Paths.get("C:/Test/out"), new String[] {"dat"}, new WatchEvent.Kind[] {StandardWatchEventKinds.ENTRY_MODIFY});
+		this.flatFileWatcher.watch(Paths.get("data/in"), Paths.get("data/out"), new String[] {"dat"}, new WatchEvent.Kind[] {StandardWatchEventKinds.ENTRY_MODIFY});
 	}
 
 }

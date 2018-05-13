@@ -54,7 +54,7 @@ public class FlatFileReaderTest {
 	@Test
 	public void testGetFlatFile() {
 		
-		final FlatFile flatFile = this.flatFileReader.getFlatFile(Paths.get("C:/Test/in/flatfile.dat"));
+		final FlatFile flatFile = this.flatFileReader.getFlatFile(Paths.get("data/in/flatfile.dat"));
 		Assert.assertNotNull(flatFile);
 		
 //		this.printFlatFile(this.flatFile);
