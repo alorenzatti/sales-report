@@ -31,9 +31,30 @@ class FlatFileImpl implements FlatFile {
 	}
 	
 	@Override
+	public Salesman getWorstSalesmanEver() {
+		Salesman worstSalesmanEver = null;
+		Float worstSalesmanSalesSumEver = Float.MAX_VALUE;
+		
+		for(Salesman salesman : this.salesmans) {
+			Float salesmanSalesSum = 0.0f;
+			for(Sale sale : this.sales) {
+				if(sale.getSalesman().equals(salesman)) {
+					salesmanSalesSum += sale.getSaleSum();
+				}
+			}
+			
+			if(salesmanSalesSum < worstSalesmanSalesSumEver) {
+				worstSalesmanEver = salesman;
+				worstSalesmanSalesSumEver = salesmanSalesSum;
+			}
+		}
+		return worstSalesmanEver;
+	}
+	
+	@Override
 	public Salesman getSalesmanByName(String name) {
 		
-		for(Salesman salesman : salesmans) {
+		for(Salesman salesman : this.salesmans) {
 			if(salesman.getName().equals(name)) {
 				return salesman;
 			}

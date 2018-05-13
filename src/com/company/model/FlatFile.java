@@ -10,6 +10,8 @@ public interface FlatFile {
 	
 	public Salesman getSalesmanByName(String name);
 	
+	public Salesman getWorstSalesmanEver();
+	
 	public void addSalesman(Salesman salesman);
 	
 	public List<Customer> getCustomerData();
