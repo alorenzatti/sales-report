@@ -11,4 +11,6 @@ public interface Sale {
 	public void addItem(SaleItem item);
 	
 	public Salesman getSalesman();
+	
+	public Float getSaleSum();
 }

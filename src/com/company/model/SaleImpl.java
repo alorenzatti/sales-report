@@ -39,6 +39,16 @@ public class SaleImpl implements Sale {
 	}
 	
 	@Override
+	public Float getSaleSum() {
+		
+		Float sum = 0.0f;
+		for(SaleItem saleItem : this.items) {
+			sum += saleItem.getTotalPrice();
+		}
+		return sum;
+	}
+	
+	@Override
 	public boolean equals(Object obj) {
 		
 		boolean equals = false;
