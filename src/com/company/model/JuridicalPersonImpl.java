@@ -19,4 +19,17 @@ class JuridicalPersonImpl extends PersonImpl {
 	public void setRegistration(String registration) {
 		this.CNPJ = registration;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		final boolean superEquals = super.equals(obj);
+		
+		boolean equals = false;
+		if(obj != null && obj instanceof JuridicalPersonImpl) {
+			final JuridicalPersonImpl juridicalPerson = (JuridicalPersonImpl) obj;
+
+			equals = this.CNPJ.equals(juridicalPerson.CNPJ);
+		}
+		return superEquals && equals;
+	}
 }

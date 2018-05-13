@@ -32,4 +32,18 @@ public class SaleImpl implements Sale {
 	public List<SaleItem> getItems() {
 		return new ArrayList<>(this.items);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		boolean equals = false;
+		if(obj != null && obj instanceof SaleImpl) {
+			final SaleImpl sale = (SaleImpl) obj;
+			
+			equals = this.id == sale.id &&
+					 this.salesman.equals(sale.salesman) &&
+					 this.items.equals(sale.items);
+		}
+		return equals;
+	}
 }
