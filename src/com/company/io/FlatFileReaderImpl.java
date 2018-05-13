@@ -23,23 +23,27 @@ class FlatFileReaderImpl implements FlatFileReader {
 	
 	private final String separator;
 	
-	private final File flatFile;
-	
-	public FlatFileReaderImpl(String separator, File flatFile) {
+	public FlatFileReaderImpl(String separator) {
 		super();
 		
 		this.separator = separator;
-		this.flatFile = flatFile;
 	}
 	
-	public FlatFile getFlatFile() {
-		return this.processFlatFile(this.init());
+	public FlatFile getFlatFile(File flatFile) {
+		
+		final BufferedReader reader = this.init(flatFile);
+		
+		final FlatFile flatFileModel = this.processFlatFile(reader, flatFile);
+		
+		this.finish(reader);
+		
+		return flatFileModel;
 	}
 	
-	private BufferedReader init() {
+	private BufferedReader init(File flatFile) {
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader(this.flatFile));
+			reader = new BufferedReader(new FileReader(flatFile));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -47,8 +51,16 @@ class FlatFileReaderImpl implements FlatFileReader {
 		return reader;
 	}
 	
-	private FlatFile processFlatFile(BufferedReader reader) {
-		final FlatFile flatFile = ModelFactory.newFlatFile(this.flatFile.getName());
+	private void finish(BufferedReader reader) {
+		try {
+			reader.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private FlatFile processFlatFile(BufferedReader reader, File flatFile) {
+		final FlatFile flatFileModel = ModelFactory.newFlatFile(flatFile.getName());
 
 		try {
 			while(reader.ready()) {
@@ -58,17 +70,17 @@ class FlatFileReaderImpl implements FlatFileReader {
 				switch(format) {
 					case SALESMAN_FORMAT: {
 						final Salesman salesman = this.processSalesman(tokenizer);
-						flatFile.addSalesman(salesman);
+						flatFileModel.addSalesman(salesman);
 						break;
 					}
 					case CUSTOMER_FORMAT: {
 						final Customer customer = this.processCustomer(tokenizer);
-						flatFile.addCustomer(customer);
+						flatFileModel.addCustomer(customer);
 						break;
 					}
 					case SALE_FORMAT: {
-						final Sale sale = this.processSale(tokenizer, flatFile);
-						flatFile.addSale(sale);
+						final Sale sale = this.processSale(tokenizer, flatFileModel);
+						flatFileModel.addSale(sale);
 						break;
 					}
 				}
@@ -76,7 +88,7 @@ class FlatFileReaderImpl implements FlatFileReader {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-		return flatFile;
+		return flatFileModel;
 	}
 	
 	private Salesman processSalesman(StringTokenizer tokenizer) {
