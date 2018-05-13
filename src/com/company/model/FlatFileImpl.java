@@ -5,16 +5,24 @@ import java.util.List;
 
 class FlatFileImpl implements FlatFile {
 	
+	private final String name;
 	private final List<Salesman> salesmans;
 	private final List<Customer> customers;
 	private final List<Sale> sales;
 	
-	public FlatFileImpl() {
+	public FlatFileImpl(String name) {
 		super();
+		
+		this.name = name;
 		
 		this.salesmans = new ArrayList<>();
 		this.customers = new ArrayList<>();
 		this.sales = new ArrayList<>();
+	}
+	
+	@Override
+	public String getName() {
+		return this.name;
 	}
 	
 	@Override
@@ -23,9 +31,30 @@ class FlatFileImpl implements FlatFile {
 	}
 	
 	@Override
+	public Salesman getWorstSalesmanEver() {
+		Salesman worstSalesmanEver = null;
+		Float worstSalesmanSalesSumEver = Float.MAX_VALUE;
+		
+		for(Salesman salesman : this.salesmans) {
+			Float salesmanSalesSum = 0.0f;
+			for(Sale sale : this.sales) {
+				if(sale.getSalesman().equals(salesman)) {
+					salesmanSalesSum += sale.getSaleSum();
+				}
+			}
+			
+			if(salesmanSalesSum < worstSalesmanSalesSumEver) {
+				worstSalesmanEver = salesman;
+				worstSalesmanSalesSumEver = salesmanSalesSum;
+			}
+		}
+		return worstSalesmanEver;
+	}
+	
+	@Override
 	public Salesman getSalesmanByName(String name) {
 		
-		for(Salesman salesman : salesmans) {
+		for(Salesman salesman : this.salesmans) {
 			if(salesman.getName().equals(name)) {
 				return salesman;
 			}
@@ -51,6 +80,19 @@ class FlatFileImpl implements FlatFile {
 	@Override
 	public List<Sale> getSalesData() {
 		return new ArrayList<>(this.sales);
+	}
+	
+	@Override
+	public Sale getMostExpensiveSale() {
+		
+		Sale mostExpensiveSale = ModelFactory.newSale(0, new ArrayList<>(), null);
+		
+		for(Sale sale : this.sales) {
+			if(sale.getSaleSum() > mostExpensiveSale.getSaleSum()) {
+				mostExpensiveSale = sale;
+			}
+		}
+		return mostExpensiveSale;
 	}
 
 	@Override

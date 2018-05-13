@@ -1,10 +1,12 @@
 package com.company.io;
 
-import java.io.File;
-
 public class IOFactory {
 	
-	public static FlatFileReader newFlatFileReader(File flatFile) {
-		return new FlatFileReaderImpl("ç", flatFile);
+	public static FlatFileReader newFlatFileReader(String separator) {
+		return new FlatFileReaderImpl(separator);
+	}
+	
+	public static FlatFileReportWriter newFlatFileReportWriter() {
+		return new FlatFileReportWriterImpl();
 	}
 }
