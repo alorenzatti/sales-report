@@ -3,6 +3,8 @@ package com.company.model;
 import java.util.List;
 
 public interface FlatFile {
+	
+	public String getName();
 
 	public List<Salesman> getSalesmanData();
 	

@@ -20,7 +20,7 @@ public class ModelFactory {
 		return new SaleImpl(id, saleItems, salesman);
 	}
 	
-	public static FlatFile newFlatFile() {
-		return new FlatFileImpl();
+	public static FlatFile newFlatFile(String name) {
+		return new FlatFileImpl(name);
 	}
 }

@@ -27,7 +27,7 @@ public class FlatFileReaderTest {
 		final String location = "C:/Test/in/flatfile.dat";
 		this.flatFileReader = IOFactory.newFlatFileReader(new File(location));
 		
-		this.flatFile = ModelFactory.newFlatFile();
+		this.flatFile = ModelFactory.newFlatFile("mockflatfile.dat");
 		
 		final Salesman diego = ModelFactory.newSalesman("Diego", "1234567891234", 50000f);
 		this.flatFile.addSalesman(diego);
@@ -65,6 +65,8 @@ public class FlatFileReaderTest {
 	}
 	
 	private void printFlatFile(FlatFile flatFile) {
+		
+		System.out.println(String.format("FLATFILE: %s", flatFile.getName()));
 		
 		for(Salesman salesman : flatFile.getSalesmanData()) {
 			System.out.println(String.format("SALESMAN: %s, %s, %.2f", salesman.getName(), salesman.getRegistration(), salesman.getSalary()));

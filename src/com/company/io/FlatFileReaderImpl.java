@@ -48,7 +48,7 @@ class FlatFileReaderImpl implements FlatFileReader {
 	}
 	
 	private FlatFile processFlatFile(BufferedReader reader) {
-		final FlatFile flatFile = ModelFactory.newFlatFile();
+		final FlatFile flatFile = ModelFactory.newFlatFile(this.flatFile.getName());
 
 		try {
 			while(reader.ready()) {

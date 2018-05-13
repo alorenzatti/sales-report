@@ -5,16 +5,24 @@ import java.util.List;
 
 class FlatFileImpl implements FlatFile {
 	
+	private final String name;
 	private final List<Salesman> salesmans;
 	private final List<Customer> customers;
 	private final List<Sale> sales;
 	
-	public FlatFileImpl() {
+	public FlatFileImpl(String name) {
 		super();
+		
+		this.name = name;
 		
 		this.salesmans = new ArrayList<>();
 		this.customers = new ArrayList<>();
 		this.sales = new ArrayList<>();
+	}
+	
+	@Override
+	public String getName() {
+		return this.name;
 	}
 	
 	@Override
