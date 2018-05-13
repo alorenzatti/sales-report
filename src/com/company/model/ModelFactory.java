@@ -19,4 +19,8 @@ public class ModelFactory {
 	public static Sale newSale(Integer id, List<SaleItem> saleItems, Salesman salesman) {
 		return new SaleImpl(id, saleItems, salesman);
 	}
+	
+	public static FlatFile newFlatFile() {
+		return new FlatFileImpl();
+	}
 }
