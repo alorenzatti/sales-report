@@ -43,5 +43,18 @@ class SaleItemImpl implements SaleItem {
 	public void setPrice(Float price) {
 		this.price = price;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		boolean equals = false;
+		if(obj != null && obj instanceof SaleItemImpl) {
+			final SaleItemImpl saleItem = (SaleItemImpl) obj;
 
+			equals = this.id == saleItem.id &&
+					 this.quantity == saleItem.quantity &&
+					 Math.abs(this.price - saleItem.price) < 0.001f;
+		}
+		return equals;
+	}
 }

@@ -1,8 +1,10 @@
 package com.company.model;
 
+import java.util.List;
+
 public class ModelFactory {
 	
-	public static Salesman newSalesman(String CPF, String name, Float salary) {
+	public static Salesman newSalesman(String name, String CPF, Float salary) {
 		return new SalesmanImpl(name, CPF, salary);
 	}
 	
@@ -14,8 +16,11 @@ public class ModelFactory {
 		return new SaleItemImpl(id, quantity, price);
 	}
 	
-	public static Sale newSale(Integer id, Salesman salesman) {
-		return new SaleImpl(id, salesman);
+	public static Sale newSale(Integer id, List<SaleItem> saleItems, Salesman salesman) {
+		return new SaleImpl(id, saleItems, salesman);
 	}
-
+	
+	public static FlatFile newFlatFile() {
+		return new FlatFileImpl();
+	}
 }
